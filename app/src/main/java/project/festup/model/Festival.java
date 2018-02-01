@@ -8,49 +8,79 @@ import java.util.Date;
 
 public class Festival {
 
-    //TODO : All
+    int ID;
+    String Name;
+    Date start;
+    Date end;
+    Addresses address;
+    String info;
+    String description;
 
-    String name;
-    Date startDate;
-    Date endDate;
-    String location;
+    public Festival(int ID, String name, Date start, Date endDate, Addresses address, String info, String description) {
+        this.ID = ID;
+        this.Name = name;
+        this.start = start;
+        this.end = endDate;
+        this.address = address;
+        this.info = info;
+        this.description = description;
+    }
 
-    public Festival(String name, String location) {
-        this.name = name;
-        this.startDate = new Date(2018, 03, 8);
-        this.endDate = new Date(2018, 03, 10);
-        this.location = location;
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getStart() {
+        return start;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStart(Date start) {
+        this.start = start;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getEnd() {
+        return end;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEnd(Date end) {
+        this.end = end;
     }
 
-    public String getLocation() {
-        return location;
+    public Addresses getAddress() {
+        return address;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(Addresses address) {
+        this.address = address;
     }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
 }

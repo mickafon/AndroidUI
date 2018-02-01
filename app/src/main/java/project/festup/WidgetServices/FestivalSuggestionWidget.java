@@ -6,39 +6,43 @@ import android.content.Context;
 import android.widget.RemoteViews;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 import project.festup.R;
+import project.festup.model.Addresses;
 import project.festup.model.Festival;
 
 /**
  * Implementation of App Widget functionality.
  */
-public class NextEventWidget extends AppWidgetProvider {
+public class FestivalSuggestionWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
+        String name = "", date = "", location = "";
         SimpleDateFormat formater = new SimpleDateFormat("dd/MM/YYYY");
-        String title, name, date, location;
+        Random rand = new Random();
 
-        //GET FESTIVAL & INIT WIDGET : NEXT DATE OR SUGGEST
-        Festival festival = getnextevent();
+        ArrayList<Festival> list = getnextfestival();
 
-        if(festival != null) {
-            title = "Prochain Festival :";
-        } else {
-            festival = getsuggestevent();
-            title = "Suggestion :";
+        if (list.size() > 0) {
+            int max = list.size();
+            int value = rand.nextInt(max);
+            Festival festival = list.get(value);
+
+            if (festival != null) {
+                name = festival.getName();
+                date = formater.format(festival.getStart()) + " - " + formater.format(festival.getEnd());
+                location = festival.getAddress().getPostal() + " (" + festival.getAddress().getCity() + ")";
+            }
         }
 
-        name = festival.getName();
-        date = formater.format(festival.getStartDate()) + " - " + formater.format(festival.getEndDate());
-        location = festival.getLocation();
-
         // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.next_event_widget);
-        views.setTextViewText(R.id.w_festival_title, title);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.festival_suggestion_widget);
         views.setTextViewText(R.id.w_festival_name, name);
         views.setTextViewText(R.id.w_festival_date, date);
         views.setTextViewText(R.id.w_festival_location, location);
@@ -65,28 +69,18 @@ public class NextEventWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
+    public static ArrayList<Festival> getnextfestival() {
 
+        ArrayList<Festival> list = new ArrayList<Festival>();
 
-    private static Festival getnextevent() {
+        //TODO : retourne la liste des futurs festivals
 
-        Festival festival;
+        //Lignes à supprimer
+        Addresses address =  new Addresses(1, "Adresse du Festival", "Chez Mamie", "Rue du faubourg saint-antoine", "75012", "Paris");
+        Festival festival = new Festival(1, "Festoch de Mamie", new Date(), new Date(), address, "", "");
+        list.add(festival);
 
-        //TODO : modifier afin de récupérer le prochain event pour un user
-        festival = new Festival("SuperFestival n°1", "Paname");
-
-        return festival;
+        return list;
     }
-
-    private static Festival getsuggestevent() {
-
-        Festival festival;
-
-        //TODO : modifier afin de récupérer un event de suggestion (random sur top 10 festival ? )
-        festival = new Festival("SuperFestival n°2", "Paname");
-
-        return festival;
-
-    }
-
 }
 
