@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="project.festup">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
 
     <application
         android:allowBackup="true"
@@ -22,16 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ArtistSearchActivity" />
-
-        <receiver android:name=".WidgetServices.FestivalSuggestionWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/festival_suggestion_widget_info" />
-        </receiver>
+        <activity android:name=".FestivalSearchActivity" />
+        <activity android:name=".ArtistActivity" />
+        <activity android:name=".FestivalActivity" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>

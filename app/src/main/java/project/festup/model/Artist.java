@@ -3,76 +3,28 @@ package project.festup.model;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
+
 public class Artist {
     protected int id;
-    protected String thumb;
-    protected String title;
-    protected String resource_url;
-
-    public Artist() {
-    }
-
-    public Artist(int id, String thumb, String title, String resource_url) {
-        this.id = id;
-        this.thumb = thumb;
-        this.title = title;
-        this.resource_url = resource_url;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getThumb() {
-        return thumb;
-    }
-
-    public void setThumb(String thumb) {
-        this.thumb = thumb;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getResource_url() {
-        return resource_url;
-    }
-
-    public void setResource_url(String resource_url) {
-        this.resource_url = resource_url;
-    }
-
-    /*protected int id;
     protected String name;
     protected String description;
-    protected String facebook;
-    protected String twitter;
-    protected String wikipedia;
-    protected String youtube;
-    protected Media media;
-
+    protected boolean valid;
+    protected ArrayList<Media> medias;
+    protected ArrayList<Platform> platforms;
+    protected ArrayList<Festival> festivals;
 
     public Artist() {
     }
 
-    public Artist(int id, String name, String description, String facebook, String twitter, String wikipedia, String youtube, Media media) {
+    public Artist(int id, String name, String description, boolean valid, ArrayList<Media> medias, ArrayList<Platform> platforms, ArrayList<Festival> festivals) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.facebook = facebook;
-        this.twitter = twitter;
-        this.wikipedia = wikipedia;
-        this.youtube = youtube;
-        this.media = media;
+        this.valid = valid;
+        this.medias = medias;
+        this.platforms = platforms;
+        this.festivals = festivals;
     }
 
     public int getId() {
@@ -99,43 +51,35 @@ public class Artist {
         this.description = description;
     }
 
-    public String getFacebook() {
-        return facebook;
+    public boolean isValid() {
+        return valid;
     }
 
-    public void setFacebook(String facebook) {
-        this.facebook = facebook;
+    public void setValid(boolean valid) {
+        this.valid = valid;
     }
 
-    public String getTwitter() {
-        return twitter;
+    public ArrayList<Media> getMedias() {
+        return medias;
     }
 
-    public void setTwitter(String twitter) {
-        this.twitter = twitter;
+    public void setMedias(ArrayList<Media> medias) {
+        this.medias = medias;
     }
 
-    public String getWikipedia() {
-        return wikipedia;
+    public ArrayList<Platform> getPlatforms() {
+        return platforms;
     }
 
-    public void setWikipedia(String wikipedia) {
-        this.wikipedia = wikipedia;
+    public void setPlatforms(ArrayList<Platform> platforms) {
+        this.platforms = platforms;
     }
 
-    public String getYoutube() {
-        return youtube;
+    public ArrayList<Festival> getFestivals() {
+        return festivals;
     }
 
-    public void setYoutube(String youtube) {
-        this.youtube = youtube;
+    public void setFestivals(ArrayList<Festival> festivals) {
+        this.festivals = festivals;
     }
-
-    public Media getMedia() {
-        return media;
-    }
-
-    public void setMedia(Media media) {
-        this.media = media;
-    }*/
 }

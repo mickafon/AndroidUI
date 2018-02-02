@@ -1,5 +1,6 @@
 package project.festup;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.StrictMode;
@@ -22,15 +23,14 @@ import project.festup.model.Artist;
 /**
  * Created by mickael.afonso on 17/12/2017.
  */
-public class Request extends AsyncTask<String, Long, ArrayList<Artist>> {
-    private String site = "https://api.discogs.com/database/search?key=aDcvryBIrPKnnwxMNLro&secret=PwQfycIWOaRcgXclBnFoQhIDTUfFeLfg&type=artist";
+public class Request extends AsyncTask<String, Long, ArrayList<Object>> {
+    private String site = "http://localhost:3000";
     private String link;
     private String type;
     protected ListView listView;
-    protected ArtistSearchActivity activity;
+    protected Activity activity;
 
-    public Request(String page, String type, ListView listView, ArtistSearchActivity activity){
-        page = "&q=" + page;
+    public Request(String page, String type, ListView listView, Activity activity){
         link = site + page;
         this.type = type;
         this.listView = listView;
@@ -39,17 +39,13 @@ public class Request extends AsyncTask<String, Long, ArrayList<Artist>> {
     }
 
     @Override
-    protected ArrayList<Artist> doInBackground(String... strings) {
-        ArrayList<Artist> objects = new ArrayList<>();
+    protected ArrayList<Object> doInBackground(String... strings) {
+        ArrayList<Object> objects = new ArrayList<>();
         try {
-            /*StrictMode.ThreadPolicy policy = new StrictMode.
-                    ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);*/
             URL url = new URL(link);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(1500);
             conn.setRequestMethod("GET");
-            //conn.setDoOutput(true);
             conn.connect();
 
             InputStream is = conn.getInputStream();
@@ -69,20 +65,25 @@ public class Request extends AsyncTask<String, Long, ArrayList<Artist>> {
         return objects;
     }
 
-    public ArrayList<Artist> parseJson(String json){
+    public ArrayList<Object> parseJson(String json){
         JsonElement jelement = new JsonParser().parse(json);
         JsonObject jobject = jelement.getAsJsonObject();
         JsonArray jarray = jobject.getAsJsonArray("results");
-        ArrayList<Artist> artists = new ArrayList<>();
+        ArrayList<Object> objects = new ArrayList<>();
         for (int i = 0; i < jarray.size(); i++) {
             JsonObject jsonObject = jarray.get(i).getAsJsonObject();
-            artists.add(new Artist(jsonObject.get("id").getAsInt(), jsonObject.get("thumb").getAsString(), jsonObject.get("title").getAsString(), jsonObject.get("resource_url").getAsString()));
+            switch (type){
+                case "Artist":
+                    //objects.add(new Artist(jsonObject.get("id").getAsInt(), jsonObject.get("thumb").getAsString(), jsonObject.get("title").getAsString(), jsonObject.get("resource_url").getAsString()));
+                    break;
+            }
+
         }
-        return artists;
+        return objects;
     }
 
     @Override
-    protected void onPostExecute(ArrayList<Artist> objects) {
+    protected void onPostExecute(ArrayList<Object> objects) {
         super.onPostExecute(objects);
         ArtistAdapter artistAdapter = new ArtistAdapter(activity, objects);
         listView.setAdapter(artistAdapter);
