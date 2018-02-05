@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "129411850486",
+    "firebase_url": "https://androidui-37478.firebaseio.com",
+    "project_id": "androidui-37478",
+    "storage_bucket": "androidui-37478.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129411850486:android:0e4ff8f584a335c3",
+        "android_client_info": {
+          "package_name": "project.festup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129411850486-k9uggoutvfl2p75vk284jblq05ij3au2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "project.festup",
+            "certificate_hash": "6ed5787ff7a3f569536b96ff9e48cc07851c5743"
+          }
+        },
+        {
+          "client_id": "129411850486-8fmak0frl6ae87uvbn6jrp0jh7uh5c8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSfEaUG_0m7HWEE3meiU2Yf2Q4OMWXUFQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129411850486-8fmak0frl6ae87uvbn6jrp0jh7uh5c8l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

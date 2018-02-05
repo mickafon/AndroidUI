@@ -1,21 +1,21 @@
 package project.festup.model;
 
 /**
- * Created by Micka on 17/01/2018.
+ * Created by Micka on 31/01/2018.
  */
 
-public class Media {
+public class Scene {
     protected int id;
     protected String name;
-    protected String url;
+    protected String description;
 
-    public Media() {
+    public Scene() {
     }
 
-    public Media(int id, String name, String url) {
+    public Scene(int id, String name, String description) {
         this.id = id;
         this.name = name;
-        this.url = url;
+        this.description = description;
     }
 
     public int getId() {
@@ -34,11 +34,11 @@ public class Media {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
+    public String getDescription() {
+        return description;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

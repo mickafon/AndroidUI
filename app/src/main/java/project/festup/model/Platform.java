@@ -1,18 +1,18 @@
 package project.festup.model;
 
 /**
- * Created by Micka on 17/01/2018.
+ * Created by Micka on 31/01/2018.
  */
 
-public class Media {
+public class Platform {
     protected int id;
     protected String name;
     protected String url;
 
-    public Media() {
+    public Platform() {
     }
 
-    public Media(int id, String name, String url) {
+    public Platform(int id, String name, String url, Type type) {
         this.id = id;
         this.name = name;
         this.url = url;
@@ -42,3 +42,4 @@ public class Media {
         this.url = url;
     }
 }
+

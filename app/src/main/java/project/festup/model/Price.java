@@ -1,21 +1,21 @@
 package project.festup.model;
 
 /**
- * Created by Micka on 17/01/2018.
+ * Created by Micka on 31/01/2018.
  */
 
-public class Media {
+public class Price {
     protected int id;
     protected String name;
-    protected String url;
+    protected float amount;
 
-    public Media() {
+    public Price() {
     }
 
-    public Media(int id, String name, String url) {
+    public Price(int id, String name, float amount) {
         this.id = id;
         this.name = name;
-        this.url = url;
+        this.amount = amount;
     }
 
     public int getId() {
@@ -34,11 +34,11 @@ public class Media {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
+    public float getAmount() {
+        return amount;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setAmount(float amount) {
+        this.amount = amount;
     }
 }
