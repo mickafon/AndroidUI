@@ -11,14 +11,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import project.festup.MainActivity;
 import project.festup.R;
+import project.festup.Request;
 import project.festup.model.Addresses;
 import project.festup.model.Festival;
 
 /**
  * Implementation of App Widget functionality.
  */
-/*public class FestivalSuggestionWidget extends AppWidgetProvider {
+public class FestivalSuggestionWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
@@ -36,7 +38,7 @@ import project.festup.model.Festival;
 
             if (festival != null) {
                 name = festival.getName();
-                date = formater.format(festival.getStart()) + " - " + formater.format(festival.getEnd());
+                date = formater.format(festival.getBegin()) + " - " + formater.format(festival.getEnd());
                 location = festival.getAddress().getPostal() + " (" + festival.getAddress().getCity() + ")";
             }
         }
@@ -72,15 +74,10 @@ import project.festup.model.Festival;
     public static ArrayList<Festival> getnextfestival() {
 
         ArrayList<Festival> list = new ArrayList<Festival>();
-
-        //TODO : retourne la liste des futurs festivals
-
-        //Lignes à supprimer
-        Addresses address =  new Addresses(1, "Adresse du Festival", "Chez Mamie", "Rue du faubourg saint-antoine", "75012", "Paris");
-        Festival festival = new Festival(1, "Festoch de Mamie", new Date(), new Date(), address, "", "");
-        list.add(festival);
-
+        Request req = new Request("/festivals/coming", "GET", null, null, null);
+        req.execute();
+        list = req.getFestivalArrayList();
         return list;
     }
-}*/
 
+}

@@ -38,6 +38,7 @@ public class Request extends AsyncTask<String, Long, ArrayList<Object>> {
     private String textPostReq;
     protected ListView listView;
     protected Activity activity;
+    protected ArrayList<Festival> festivalArrayList;
 
     public Request(String page, String type, String textPostReq, ListView listView, Activity activity){
         link = site + page;
@@ -59,7 +60,6 @@ public class Request extends AsyncTask<String, Long, ArrayList<Object>> {
                 conn.setRequestProperty("Content-Type", "application/json");
                 conn.setRequestProperty("charset", "utf-8");
                 conn.setRequestMethod("POST");
-                //Gson gson = new GsonBuilder().create();
 
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("term", textPostReq);
@@ -247,9 +247,18 @@ public class Request extends AsyncTask<String, Long, ArrayList<Object>> {
                 listView.setAdapter(artistAdapter);
                 break;
             case "festival":
+                festivalArrayList = (ArrayList) objects;
                 FestivalAdapter festivalAdapter = new FestivalAdapter(activity, objects);
                 listView.setAdapter(festivalAdapter);
                 break;
         }
+    }
+
+    public ArrayList<Festival> getFestivalArrayList() {
+        return festivalArrayList;
+    }
+
+    public void setFestivalArrayList(ArrayList<Festival> festivalArrayList) {
+        this.festivalArrayList = festivalArrayList;
     }
 }
