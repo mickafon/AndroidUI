@@ -8,7 +8,6 @@ public class Platform {
     protected int id;
     protected String name;
     protected String url;
-    protected Type type;
 
     public Platform() {
     }
@@ -17,7 +16,6 @@ public class Platform {
         this.id = id;
         this.name = name;
         this.url = url;
-        this.type = type;
     }
 
     public int getId() {
@@ -42,14 +40,6 @@ public class Platform {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
     }
 }
 

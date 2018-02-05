@@ -1,21 +1,27 @@
 package project.festup.model;
 
 /**
- * Created by Micka on 31/01/2018.
+ * Created by aimee on 01/02/2018.
  */
 
 public class Address {
-    protected int id;
+    int id;
     protected String name;
-    protected String description;
+    protected String additional;
+    protected String street;
+    protected String postal;
+    protected String city;
 
     public Address() {
     }
 
-    public Address(int id, String name, String description) {
+    public Address(int id, String name, String additional, String street, String postal, String city) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.additional = additional;
+        this.street = street;
+        this.postal = postal;
+        this.city = city;
     }
 
     public int getId() {
@@ -34,11 +40,35 @@ public class Address {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getAdditional() {
+        return additional;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAdditional(String additional) {
+        this.additional = additional;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getPostal() {
+        return postal;
+    }
+
+    public void setPostal(String postal) {
+        this.postal = postal;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

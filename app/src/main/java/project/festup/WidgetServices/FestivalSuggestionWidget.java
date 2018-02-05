@@ -18,7 +18,7 @@ import project.festup.model.Festival;
 /**
  * Implementation of App Widget functionality.
  */
-public class FestivalSuggestionWidget extends AppWidgetProvider {
+/*public class FestivalSuggestionWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
@@ -82,5 +82,5 @@ public class FestivalSuggestionWidget extends AppWidgetProvider {
 
         return list;
     }
-}
+}*/
 

@@ -1,6 +1,7 @@
 package project.festup;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,21 +9,32 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import project.festup.model.Artist;
+import project.festup.model.Festival;
+import project.festup.model.Platform;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MenuFragment.OnFragmentInteractionListener} interface
+ * {@link ArtistFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MenuFragment#newInstance} factory method to
+ * Use the {@link ArtistFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MenuFragment extends Fragment {
+public class ArtistFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    protected Artist artist;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -30,7 +42,7 @@ public class MenuFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public MenuFragment() {
+    public ArtistFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +52,11 @@ public class MenuFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MenuFragment.
+     * @return A new instance of fragment ArtistFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MenuFragment newInstance(String param1, String param2) {
-        MenuFragment fragment = new MenuFragment();
+    public static ArtistFragment newInstance(String param1, String param2) {
+        ArtistFragment fragment = new ArtistFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,12 +77,40 @@ public class MenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        return inflater.inflate(R.layout.fragment_artist, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        TextView name = (TextView) getView().findViewById(R.id.inputName);
+        TextView description = (TextView) getView().findViewById(R.id.inputDescription);
+        final ListView festivalList = (ListView) getView().findViewById(R.id.list);
+        final GridView platformList = (GridView) getView().findViewById(R.id.platformList);
+        final GridView mediaList = (GridView) getView().findViewById(R.id.galleryList);
+
+        name.setText(artist.getName());
+        description.setText(artist.getDescription());
+
+        FestivalAdapter festivalAdapter = new FestivalAdapter(getActivity(), (ArrayList) artist.getFestivals());
+        festivalList.setAdapter(festivalAdapter);
+
+        festivalList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Festival festival = (Festival) festivalList.getItemAtPosition(i);
+                goToFestivalActivity(festival);
+            }
+        });
+
+        MediaAdapter mediaAdapter = new MediaAdapter(getActivity(), artist.getMedias());
+        mediaList.setAdapter(mediaAdapter);
+
+        PlatformAdapter platformAdapter = new PlatformAdapter(getActivity(), artist.getPlatforms());
+        platformList.setAdapter(platformAdapter);
+    }
+
+    public void goToFestivalActivity(Festival festival){
 
     }
 
@@ -84,12 +124,6 @@ public class MenuFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
@@ -111,5 +145,13 @@ public class MenuFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 }

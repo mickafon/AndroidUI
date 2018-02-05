@@ -1,5 +1,6 @@
 package project.festup.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,14 +8,13 @@ import java.util.Date;
  * Created by Micka on 21/01/2018.
  */
 
-public class Festival {
+public class Festival implements Serializable {
     protected int id;
     protected String name;
-    protected Date begin;
-    protected Date end;
+    protected String begin;
+    protected String end;
     protected String description;
     protected String information;
-    protected boolean valid;
     protected ArrayList<Media> medias;
     protected ArrayList<Scene> scenes;
     protected ArrayList<Artist> artists;
@@ -25,14 +25,13 @@ public class Festival {
     public Festival() {
     }
 
-    public Festival(int id, String name, Date begin, Date end, String description, String information, boolean valid, ArrayList<Media> medias, ArrayList<Scene> scenes, ArrayList<Artist> artists, ArrayList<Platform> platforms, ArrayList<Price> prices, Address address) {
+    public Festival(int id, String name, String begin, String end, String description, String information, ArrayList<Media> medias, ArrayList<Scene> scenes, ArrayList<Artist> artists, ArrayList<Platform> platforms, ArrayList<Price> prices, Address address) {
         this.id = id;
         this.name = name;
         this.begin = begin;
         this.end = end;
         this.description = description;
         this.information = information;
-        this.valid = valid;
         this.medias = medias;
         this.scenes = scenes;
         this.artists = artists;
@@ -57,19 +56,19 @@ public class Festival {
         this.name = name;
     }
 
-    public Date getBegin() {
+    public String getBegin() {
         return begin;
     }
 
-    public void setBegin(Date begin) {
+    public void setBegin(String begin) {
         this.begin = begin;
     }
 
-    public Date getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 
@@ -87,14 +86,6 @@ public class Festival {
 
     public void setInformation(String information) {
         this.information = information;
-    }
-
-    public boolean isValid() {
-        return valid;
-    }
-
-    public void setValid(boolean valid) {
-        this.valid = valid;
     }
 
     public ArrayList<Media> getMedias() {

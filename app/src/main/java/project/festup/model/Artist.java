@@ -3,13 +3,13 @@ package project.festup.model;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Artist {
+public class Artist implements Serializable {
     protected int id;
     protected String name;
     protected String description;
-    protected boolean valid;
     protected ArrayList<Media> medias;
     protected ArrayList<Platform> platforms;
     protected ArrayList<Festival> festivals;
@@ -17,11 +17,10 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(int id, String name, String description, boolean valid, ArrayList<Media> medias, ArrayList<Platform> platforms, ArrayList<Festival> festivals) {
+    public Artist(int id, String name, String description, ArrayList<Media> medias, ArrayList<Platform> platforms, ArrayList<Festival> festivals) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.valid = valid;
         this.medias = medias;
         this.platforms = platforms;
         this.festivals = festivals;
@@ -49,14 +48,6 @@ public class Artist {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public boolean isValid() {
-        return valid;
-    }
-
-    public void setValid(boolean valid) {
-        this.valid = valid;
     }
 
     public ArrayList<Media> getMedias() {

@@ -42,7 +42,12 @@ public class ArtistAdapter extends ArrayAdapter<Object> {
 
         Artist currentArtist = (Artist) getItem(position);
 
-        new DownloadImage(imageView).execute(currentArtist.getMedias().get(0).getUrl());
+        if (currentArtist.getMedias() != null){
+            if (currentArtist.getMedias().size() > 0){
+                new DownloadImage(imageView).execute(currentArtist.getMedias().get(0).getUrl());
+            }
+        }
+
 
         nameTextView.setText(currentArtist.getName());
 

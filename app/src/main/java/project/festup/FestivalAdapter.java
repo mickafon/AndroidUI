@@ -19,8 +19,8 @@ import project.festup.model.Festival;
  * Created by Micka on 28/01/2018.
  */
 
-public class FestivalAdapter  extends ArrayAdapter<Festival> {
-    public FestivalAdapter(@NonNull Context context, @NonNull List<Festival> objects) {
+public class FestivalAdapter  extends ArrayAdapter<Object> {
+    public FestivalAdapter(@NonNull Context context, @NonNull List<Object> objects) {
         super(context, 0, objects);
     }
 
@@ -33,7 +33,7 @@ public class FestivalAdapter  extends ArrayAdapter<Festival> {
         ImageView imageView = (ImageView) row.findViewById(R.id.image);
         TextView nameTextView = (TextView) row.findViewById(R.id.name);
 
-        Festival currentFestival = getItem(position);
+        Festival currentFestival = (Festival) getItem(position);
 
         new DownloadImage(imageView).execute(currentFestival.getInformation());
 

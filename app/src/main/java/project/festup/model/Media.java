@@ -8,16 +8,14 @@ public class Media {
     protected int id;
     protected String name;
     protected String url;
-    protected Type type;
 
     public Media() {
     }
 
-    public Media(int id, String name, String url, Type type) {
+    public Media(int id, String name, String url) {
         this.id = id;
         this.name = name;
         this.url = url;
-        this.type = type;
     }
 
     public int getId() {
@@ -42,13 +40,5 @@ public class Media {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
     }
 }
