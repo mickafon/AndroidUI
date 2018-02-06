@@ -1,5 +1,6 @@
 package project.festup;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnFragmentInteractionListener {
+
+    private Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +85,8 @@ public class MainActivity extends AppCompatActivity
         ListFragment list = new ListFragment();
 
         if (id == R.id.nav_home) {
-            onBackPressed();
+            getSupportFragmentManager().beginTransaction()
+                    .remove(getSupportFragmentManager().findFragmentById(R.id.frame)).commit();
         } else if (id == R.id.nav_artists) {
             list.setType("artist");
             getSupportFragmentManager().beginTransaction()
@@ -105,5 +109,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    public void setFragment(Fragment fragment){
+        this.fragment = fragment;
     }
 }
