@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 import project.festup.MainActivity;
 import project.festup.R;
@@ -26,11 +27,11 @@ public class FestivalSuggestionWidget extends AppWidgetProvider {
                                 int appWidgetId) {
 
         String name = "", date = "", location = "";
-        SimpleDateFormat formater = new SimpleDateFormat("dd/MM/YYYY");
+        //SimpleDateFormat formater = new SimpleDateFormat("dd/MM/YYYY");
         Random rand = new Random();
 
         ArrayList<Festival> list = getnextfestival();
-
+        System.out.println(list);
         if (list.size() > 0) {
             int max = list.size();
             int value = rand.nextInt(max);
@@ -38,8 +39,11 @@ public class FestivalSuggestionWidget extends AppWidgetProvider {
 
             if (festival != null) {
                 name = festival.getName();
-                date = formater.format(festival.getBegin()) + " - " + formater.format(festival.getEnd());
-                location = festival.getAddress().getPostal() + " (" + festival.getAddress().getCity() + ")";
+                date = festival.getBegin() + "-" + festival.getEnd();//formater.format(festival.getBegin()) + " - " + formater.format(festival.getEnd());
+                if (festival.getAddress() != null){
+                    location = festival.getAddress().getPostal() + " (" + festival.getAddress().getCity() + ")";
+                }
+
             }
         }
 
@@ -74,10 +78,13 @@ public class FestivalSuggestionWidget extends AppWidgetProvider {
     public static ArrayList<Festival> getnextfestival() {
 
         ArrayList<Festival> list = new ArrayList<Festival>();
-        Request req = new Request("/festivals/coming", "GET", null, null, null);
-        req.execute();
-        list = req.getFestivalArrayList();
+        try {
+            list = (ArrayList) new Request("/festivals/coming", "festival", null, null, null).execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         return list;
     }
-
 }

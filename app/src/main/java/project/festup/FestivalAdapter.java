@@ -35,7 +35,7 @@ public class FestivalAdapter  extends ArrayAdapter<Object> {
 
         Festival currentFestival = (Festival) getItem(position);
 
-        new DownloadImage(imageView).execute(currentFestival.getInformation());
+        //new DownloadImage(imageView).execute(currentFestival.getInformation());
 
         nameTextView.setText(currentFestival.getName());
 

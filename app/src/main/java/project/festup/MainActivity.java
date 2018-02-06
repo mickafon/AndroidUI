@@ -1,5 +1,6 @@
 package project.festup;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -42,8 +43,14 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            if (getFragmentManager().getBackStackEntryCount() == 0) {
+                this.finish();
+            } else {
+                getFragmentManager().popBackStack();
+            }
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,7 +82,7 @@ public class MainActivity extends AppCompatActivity
         ListFragment list = new ListFragment();
 
         if (id == R.id.nav_home) {
-
+            onBackPressed();
         } else if (id == R.id.nav_artists) {
             list.setType("artist");
             getSupportFragmentManager().beginTransaction()

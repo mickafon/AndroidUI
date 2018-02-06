@@ -21,11 +21,13 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import project.festup.WidgetServices.FestivalSuggestionWidget;
 import project.festup.model.Address;
 import project.festup.model.Artist;
 import project.festup.model.Festival;
 import project.festup.model.Media;
 import project.festup.model.Platform;
+import project.festup.model.Scene;
 
 
 /**
@@ -38,7 +40,6 @@ public class Request extends AsyncTask<String, Long, ArrayList<Object>> {
     private String textPostReq;
     protected ListView listView;
     protected Activity activity;
-    protected ArrayList<Festival> festivalArrayList;
 
     public Request(String page, String type, String textPostReq, ListView listView, Activity activity){
         link = site + page;
@@ -84,7 +85,6 @@ public class Request extends AsyncTask<String, Long, ArrayList<Object>> {
             while ((line = bufferedReader.readLine()) != null){
                 objects = parseJson(line);
             }
-
             is.close();
 
             conn.disconnect();
@@ -127,10 +127,11 @@ public class Request extends AsyncTask<String, Long, ArrayList<Object>> {
                         if (jsonObject.get("platforms") != null) {
                             festival.setPlatforms(getPlatforms(jsonObject.getAsJsonArray("platforms")));
                         }
-                        objects.add(new Festival());
+                        objects.add(festival);
                         break;
                 }
             }
+
         }
         return objects;
     }
@@ -152,7 +153,6 @@ public class Request extends AsyncTask<String, Long, ArrayList<Object>> {
         return artists;
     }
 
-    @TargetApi(Build.VERSION_CODES.O)
     public Festival getFestival(JsonObject jsonObject){
         Festival festival = new Festival();
         festival.setId(jsonObject.get("id").getAsInt());
@@ -224,14 +224,22 @@ public class Request extends AsyncTask<String, Long, ArrayList<Object>> {
         return platform;
     }
 
-    /*public ArrayList<Scene> getScenes(JsonArray jarray){
+    public Scene getScene(JsonObject jsonObject){
+        Scene scene = new Scene();
+        scene.setId(jsonObject.get("id").getAsInt());
+        scene.setName(jsonObject.get("name").getAsString());
+        scene.setDescription(jsonObject.get("description").getAsString());
+        return scene;
+    }
+
+    public ArrayList<Scene> getScenes(JsonArray jarray){
         ArrayList<Scene> scenes = new ArrayList<>();
         for (int i = 0; i < jarray.size(); i++) {
             JsonObject jsonObject = jarray.get(i).getAsJsonObject();
-            scenes.add(getFestival(jsonObject));
+            scenes.add(getScene(jsonObject));
         }
         return scenes;
-    }*/
+    }
 
    /* public DateFormat parseDate(String strDate){
         /*DateFormat date = DateFormat.getDateTimeInstance().parse("d")
@@ -247,18 +255,11 @@ public class Request extends AsyncTask<String, Long, ArrayList<Object>> {
                 listView.setAdapter(artistAdapter);
                 break;
             case "festival":
-                festivalArrayList = (ArrayList) objects;
-                FestivalAdapter festivalAdapter = new FestivalAdapter(activity, objects);
-                listView.setAdapter(festivalAdapter);
+                if (listView != null) {
+                    FestivalAdapter festivalAdapter = new FestivalAdapter(activity, objects);
+                    listView.setAdapter(festivalAdapter);
+                }
                 break;
         }
-    }
-
-    public ArrayList<Festival> getFestivalArrayList() {
-        return festivalArrayList;
-    }
-
-    public void setFestivalArrayList(ArrayList<Festival> festivalArrayList) {
-        this.festivalArrayList = festivalArrayList;
     }
 }
