@@ -99,7 +99,7 @@ public class ArtistFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Festival festival = (Festival) festivalList.getItemAtPosition(i);
-                goToFestivalActivity(festival);
+                goToFestivalPage(festival);
             }
         });
 
@@ -110,8 +110,12 @@ public class ArtistFragment extends Fragment {
         platformList.setAdapter(platformAdapter);
     }
 
-    public void goToFestivalActivity(Festival festival){
-
+    public void goToFestivalPage(Festival festival){
+        FestivalFragment festivalFragment = new FestivalFragment();
+        festivalFragment.setFestival(festival);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame, festivalFragment)
+                .commit();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

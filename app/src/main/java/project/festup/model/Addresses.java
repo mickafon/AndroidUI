@@ -70,4 +70,8 @@ public class Addresses {
         this.city = city;
     }
 
+    @Override
+    public String toString() {
+        return name + ": " + additional + " " + street + " " + postal + " " + city;
+    }
 }

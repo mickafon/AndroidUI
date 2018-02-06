@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:text="Artistes :" />
 
-        <GridView
+        <ListView
             android:id="@+id/artistsList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

@@ -122,7 +122,7 @@ public class ListFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Festival festival = (Festival) listView.getItemAtPosition(i);
-                        //goToFestivalPage(festival);
+                        goToFestivalPage(festival);
                     }
                 });
                 break;
@@ -138,6 +138,14 @@ public class ListFragment extends Fragment {
                 .commit();
     }
 
+    public void goToFestivalPage(Festival festival){
+        FestivalFragment festivalFragment = new FestivalFragment();
+        festivalFragment.setFestival(festival);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame, festivalFragment)
+                .commit();
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -149,12 +157,6 @@ public class ListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     /**

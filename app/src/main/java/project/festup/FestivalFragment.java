@@ -3,10 +3,16 @@ package project.festup;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import project.festup.model.Festival;
 
 
 /**
@@ -22,7 +28,7 @@ public class FestivalFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    protected Festival festival;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -67,6 +73,30 @@ public class FestivalFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_festival, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        TextView name = (TextView) getView().findViewById(R.id.inputName);
+        TextView description = (TextView) getView().findViewById(R.id.inputDescription);
+        TextView information = (TextView) getView().findViewById(R.id.inputInformation);
+        TextView begin = (TextView) getView().findViewById(R.id.inputBegin);
+        TextView end = (TextView) getView().findViewById(R.id.inputEnd);
+        TextView address = (TextView) getView().findViewById(R.id.inputAddress);
+        TextView price = (TextView) getView().findViewById(R.id.inputAddress);
+
+        ListView artists = (ListView) getView().findViewById(R.id.artistsList);
+        ListView scenes = (ListView) getView().findViewById(R.id.scenesList);
+        GridView medias = (GridView) getView().findViewById(R.id.mediaList);
+        GridView platforms = (GridView) getView().findViewById(R.id.platformList);
+
+        name.setText(festival.getName());
+        description.setText(festival.getDescription());
+        information.setText(festival.getInformation());
+        begin.setText(festival.getBegin());
+        end.setText(festival.getEnd());
+        //address.setText(festival.getAddress().toString());
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -77,12 +107,6 @@ public class FestivalFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
@@ -104,5 +128,13 @@ public class FestivalFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public Festival getFestival() {
+        return festival;
+    }
+
+    public void setFestival(Festival festival) {
+        this.festival = festival;
     }
 }
