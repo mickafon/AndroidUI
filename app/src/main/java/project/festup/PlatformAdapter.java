@@ -39,7 +39,7 @@ public class PlatformAdapter extends ArrayAdapter<Platform> {
                 nameTextView.setText(currentPlatform.getUrl());
             }
         }
-
+        notifyDataSetChanged();
         return row;
     }
 }

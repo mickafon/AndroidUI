@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.setTitle(" ");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -82,7 +85,8 @@ public class MainActivity extends AppCompatActivity
         ListFragment list = new ListFragment();
 
         if (id == R.id.nav_home) {
-            onBackPressed();
+            getSupportFragmentManager().beginTransaction()
+                    .remove(getSupportFragmentManager().findFragmentById(R.id.frame)).commit();
         } else if (id == R.id.nav_artists) {
             list.setType("artist");
             getSupportFragmentManager().beginTransaction()
@@ -93,8 +97,6 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame, list)
                     .commit();
-        } else if (id == R.id.nav_manage) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

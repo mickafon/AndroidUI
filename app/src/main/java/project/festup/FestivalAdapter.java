@@ -38,7 +38,7 @@ public class FestivalAdapter  extends ArrayAdapter<Object> {
         //new DownloadImage(imageView).execute(currentFestival.getInformation());
 
         nameTextView.setText(currentFestival.getName());
-
+        notifyDataSetChanged();
         return row;
     }
 

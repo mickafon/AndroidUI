@@ -50,7 +50,7 @@ public class ArtistAdapter extends ArrayAdapter<Object> {
 
 
         nameTextView.setText(currentArtist.getName());
-
+        notifyDataSetChanged();
         return row;
     }
 }

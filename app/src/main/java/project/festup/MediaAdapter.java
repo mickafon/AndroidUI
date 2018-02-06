@@ -37,7 +37,7 @@ public class MediaAdapter extends ArrayAdapter<Media> {
                 new DownloadImage(imageView).execute(currentMedia.getUrl());
             }
         }
-
+        notifyDataSetChanged();
         return row;
     }
 }
